@@ -2,7 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Todd J. Thomson</Authors>
+    <Company>Achilles Software</Company>
+    <Product>Achilles Acme CMS</Product>
+    <Description>Achilles Acme CMS Content base library</Description>
+    <PackageReleaseNotes>Prerelease package</PackageReleaseNotes>
     <RootNamespace>Achilles.Acme.Content</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
