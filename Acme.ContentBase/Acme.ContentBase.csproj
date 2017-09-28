@@ -19,7 +19,7 @@
 
   <Choose>
     <When Condition="'$(Configuration)' == 'Debug' AND Exists('..\..\..\Acme')">
-      <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+      <ItemGroup>
         <ProjectReference Include="..\..\Acme.Core\Acme.Core\Acme.Core.csproj" />
       </ItemGroup>
     </When>

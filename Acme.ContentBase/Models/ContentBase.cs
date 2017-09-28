@@ -1,5 +1,16 @@
+#region Copyright Notice
+
+// Copyright (c) by Achilles Software, All rights reserved.
+//
+// Licensed under the MIT License. See License.txt in the project root for license information.
+//
+// Send questions regarding this copyright notice to: mailto:Todd.Thomson@achilles-software.com
+
+#endregion
+
 #region Namespaces
 
+using Achilles.Acme.Content.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +20,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Achilles.Acme.Content.Models
 {
-    public abstract partial class ContentBase
+    public abstract partial class ContentBase : IContentEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ContentBase()
@@ -18,7 +29,7 @@ namespace Achilles.Acme.Content.Models
         }
 
         [Key]
-        public int ContentId { get; set; }
+        public int Id { get; set; }
 
         public Guid ContentTypeId { get; set; }
 

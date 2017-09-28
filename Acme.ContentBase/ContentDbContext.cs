@@ -14,23 +14,18 @@ namespace Achilles.Acme.Content
         {
         }
 
-        //public ContentDbContext()
-        //    : base( "name=DefaultConnection" )
-        //{
-        //}
-
         //public virtual DbSet<ContentBase> ContentBaseSet { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
 
-        //protected override void OnModelCreating( DbModelBuilder modelBuilder )
-        //{
-        //    //modelBuilder.Entity<ContentBase>()
-        //    //    .ToTable( "cms_ContentBase" );
+        protected override void OnModelCreating( ModelBuilder modelBuilder )
+        {
+            //modelBuilder.Entity<Achilles.Acme.Content.Models.ContentBase>()
+            //    .ToTable( "cms_ContentBase" );
 
-        //    //modelBuilder.Entity<ContentBase>()
-        //    //    .HasMany( e => e.Tags )
-        //    //    .WithMany( e => e.ContentBaseSet )
-        //    //    .Map( m => m.ToTable( "cms_ContentBaseTags" ).MapLeftKey( "ContentId" ).MapRightKey( "TagId" ) );
-        //}
+            //modelBuilder.Entity<ContentBase>()
+            //    .HasMany( e => e.Tags )
+            //    .WithMany( e => e.ContentBaseSet )
+            //    .Map( m => m.ToTable( "cms_ContentBaseTags" ).MapLeftKey( "ContentId" ).MapRightKey( "TagId" ) );
+        }
     }
 }
