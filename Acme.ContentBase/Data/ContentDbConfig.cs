@@ -7,6 +7,8 @@
 
 namespace Achilles.Acme.ContentBase
 {
+    // TJT: Review and remove...
+
     //public class ContentDbConfig : DbConfiguration
     //{
     //    // Notes: There can only be a single DbConfiguration for the application.

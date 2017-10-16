@@ -10,10 +10,15 @@
 
 #region Namespaces
 
+using Achilles.Acme.Configuration;
+using Achilles.Acme.Content.Data;
+using Achilles.Acme.Core.Data;
 using Achilles.Acme.Plugins;
 
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 
@@ -37,6 +42,12 @@ namespace Achilles.Acme.Content
         public override void Initialize( IServiceCollection services )
         {
             base.Initialize( services );
+
+            // Ensure that the CMS content entities are created and updated to the latest migration
+            var serviceProvider = services.BuildServiceProvider();
+            var contentDbContext = serviceProvider.GetRequiredService<ContentDbContext>();
+
+            contentDbContext.MigrateDbContextToLatestVersion( serviceProvider );
         }
 
         protected override void RegisterSettings( IServiceCollection services )
@@ -57,10 +68,16 @@ namespace Achilles.Acme.Content
         {
         }
 
-        protected override void RegisterServices( IServiceCollection serviceCollection )
+        protected override void RegisterServices( IServiceCollection services )
         {
             // Add module services..
-            serviceCollection.AddSingleton<ContentModule>( this );
+            services.AddSingleton<ContentModule>( this );
+
+            // Add DbContext...
+            string connectionString = ConfigurationHelper.GetConfiguration( services ).GetConnectionString( "DefaultConnection" );
+
+            services.AddDbContext<ContentDbContext>( options =>
+                     options.UseSqlServer( connectionString ) );
         }
 
         #endregion

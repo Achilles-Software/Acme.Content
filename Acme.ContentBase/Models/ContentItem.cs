@@ -20,33 +20,41 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Achilles.Acme.Content.Models
 {
-    public abstract partial class ContentBase : IContentEntity
+    /// <summary>
+    /// The base class implentation for a derived CMS content type item.
+    /// </summary>
+    public abstract class ContentItem //: IContentEntity
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ContentBase()
+        public ContentItem()
         {
-            Tags = new HashSet<Tag>();
+            Post = new Post();
+
+            this.Status = (int)Achilles.Acme.Content.Models.Status.Draft;
         }
 
-        [Key]
-        public int Id { get; set; }
-
-        public Guid ContentTypeId { get; set; }
-
+        [Required]
         public Guid CreatedByUserId { get; set; }
 
-        public DateTime DateCreated { get; set; }
+        [Required]
+        public DateTime DateCreated { get; set; } = DateTime.Now;
 
-        public DateTime DateModified { get; set; }
+        [Required]
+        public DateTime DateModified { get; set; } = DateTime.Now;
 
-        public DateTime DatePublished { get; set; }
+        [Required]
+        public DateTime DatePublished { get; set; } = DateTime.Now;
+
+        [Required]
+        public string ConcurrencyStamp { get; set; } = Guid.NewGuid().ToString();
 
         // Deprecated - Use Status
-        public bool IsPublished { get; set; }
+        public bool IsPublished { get; set; } = false;
 
+        [Required]
         public int Status { get; set; }
 
-        public bool IsSticky { get; set; }
+        [Required]
+        public bool IsSticky { get; set; } = false;
 
         [Required]
         [StringLength( 128 )]
@@ -58,7 +66,7 @@ namespace Achilles.Acme.Content.Models
         [StringLength( 256 )]
         public string SeoDescription { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tag> Tags { get; set; }
+        [Required]
+        public Post Post { get; set; }
     }
 }
