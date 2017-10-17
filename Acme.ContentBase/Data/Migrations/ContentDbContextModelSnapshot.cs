@@ -27,7 +27,7 @@ namespace Achilles.Acme.Content.Data.Migrations
 
                     b.Property<int?>("CommentId");
 
-                    b.Property<int?>("PostContentId");
+                    b.Property<int?>("PostId");
 
                     b.Property<string>("Text")
                         .IsRequired();
@@ -36,19 +36,19 @@ namespace Achilles.Acme.Content.Data.Migrations
 
                     b.HasIndex("CommentId");
 
-                    b.HasIndex("PostContentId");
+                    b.HasIndex("PostId");
 
                     b.ToTable("cms_Comments");
                 });
 
             modelBuilder.Entity("Achilles.Acme.Content.Models.Post", b =>
                 {
-                    b.Property<int>("ContentId")
+                    b.Property<int>("PostId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<Guid>("ContentTypeId");
 
-                    b.HasKey("ContentId");
+                    b.HasKey("PostId");
 
                     b.ToTable("cms_Posts");
                 });
@@ -90,7 +90,7 @@ namespace Achilles.Acme.Content.Data.Migrations
 
                     b.HasOne("Achilles.Acme.Content.Models.Post")
                         .WithMany("Comments")
-                        .HasForeignKey("PostContentId");
+                        .HasForeignKey("PostId");
                 });
 
             modelBuilder.Entity("Achilles.Acme.Content.Models.PostTags", b =>

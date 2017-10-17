@@ -32,6 +32,9 @@ namespace Achilles.Acme.Content.Models
             this.Status = (int)Achilles.Acme.Content.Models.Status.Draft;
         }
 
+        [Key]
+        public int Id { get; set; }
+
         [Required]
         public Guid CreatedByUserId { get; set; }
 
@@ -66,7 +69,9 @@ namespace Achilles.Acme.Content.Models
         [StringLength( 256 )]
         public string SeoDescription { get; set; }
 
-        [Required]
+        [ForeignKey( "Post" )]
+        public int PostIdReference { get; set; }
+
         public Post Post { get; set; }
     }
 }

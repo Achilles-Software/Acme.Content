@@ -20,7 +20,7 @@ namespace Achilles.Acme.Content.Models
         }
 
         [Key]
-        public int ContentId { get; set; }
+        public int PostId { get; set; }
 
         public Guid ContentTypeId { get; set; }
 

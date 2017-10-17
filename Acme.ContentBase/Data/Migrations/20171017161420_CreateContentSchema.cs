@@ -13,13 +13,13 @@ namespace Achilles.Acme.Content.Data.Migrations
                 name: "cms_Posts",
                 columns: table => new
                 {
-                    ContentId = table.Column<int>(type: "int", nullable: false)
+                    PostId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ContentTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cms_Posts", x => x.ContentId);
+                    table.PrimaryKey("PK_cms_Posts", x => x.PostId);
                 });
 
             migrationBuilder.CreateTable(
@@ -43,7 +43,7 @@ namespace Achilles.Acme.Content.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CommentId = table.Column<int>(type: "int", nullable: true),
-                    PostContentId = table.Column<int>(type: "int", nullable: true),
+                    PostId = table.Column<int>(type: "int", nullable: true),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -56,10 +56,10 @@ namespace Achilles.Acme.Content.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_cms_Comments_cms_Posts_PostContentId",
-                        column: x => x.PostContentId,
+                        name: "FK_cms_Comments_cms_Posts_PostId",
+                        column: x => x.PostId,
                         principalTable: "cms_Posts",
-                        principalColumn: "ContentId",
+                        principalColumn: "PostId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -77,7 +77,7 @@ namespace Achilles.Acme.Content.Data.Migrations
                         name: "FK_cms_PostTags_cms_Posts_PostId",
                         column: x => x.PostId,
                         principalTable: "cms_Posts",
-                        principalColumn: "ContentId",
+                        principalColumn: "PostId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_cms_PostTags_cms_Tags_TagId",
@@ -93,9 +93,9 @@ namespace Achilles.Acme.Content.Data.Migrations
                 column: "CommentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_cms_Comments_PostContentId",
+                name: "IX_cms_Comments_PostId",
                 table: "cms_Comments",
-                column: "PostContentId");
+                column: "PostId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cms_PostTags_TagId",
