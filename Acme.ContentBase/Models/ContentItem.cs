@@ -11,6 +11,7 @@
 #region Namespaces
 
 using Achilles.Acme.Content.Entities;
+using Achilles.Acme.Content.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -23,20 +24,24 @@ namespace Achilles.Acme.Content.Models
     /// <summary>
     /// The base class implentation for a derived CMS content type item.
     /// </summary>
-    public abstract class ContentItem //: IContentEntity
+    public abstract class ContentItem : IContentEntity, ITenantEntity
     {
-        public ContentItem()
+        public ContentItem()// string pluginId, string userId, string title )
         {
-            Post = new Post();
+            //Title = title;
+            //SeoFriendlyTitle = SeoHelpers.SeoFriendlyTitle( Title );
+            //CreatedByUserId = userId;
 
-            this.Status = (int)Achilles.Acme.Content.Models.Status.Draft;
+            Post = new Post();// pluginId );
         }
 
         [Key]
         public int Id { get; set; }
 
+        public string TenantId { get; set; }
+
         [Required]
-        public Guid CreatedByUserId { get; set; }
+        public string CreatedByUserId { get; set; }
 
         [Required]
         public DateTime DateCreated { get; set; } = DateTime.Now;
@@ -54,7 +59,7 @@ namespace Achilles.Acme.Content.Models
         public bool IsPublished { get; set; } = false;
 
         [Required]
-        public int Status { get; set; }
+        public int Status { get; set; } = (int) Achilles.Acme.Content.Models.Status.Draft;
 
         [Required]
         public bool IsSticky { get; set; } = false;

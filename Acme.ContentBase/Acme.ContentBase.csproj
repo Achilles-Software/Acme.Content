@@ -28,11 +28,13 @@
     <When Condition="'$(Configuration)' == 'Debug' AND Exists('..\..\..\Acme')">
       <ItemGroup>
         <ProjectReference Include="..\..\Acme.Core\Acme.Core\Acme.Core.csproj" />
+        <ProjectReference Include="..\..\Acme.UI\Acme.UI\Acme.UI.csproj" />        
       </ItemGroup>
     </When>
     <Otherwise>
       <ItemGroup>
         <PackageReference Include="Acme.Core" Version="$(VersionPrefix)-$(VersionSuffix)-*" />
+        <PackageReference Include="Acme.UI" Version="$(VersionPrefix)-$(VersionSuffix)-*" />        
       </ItemGroup>
     </Otherwise>
   </Choose>

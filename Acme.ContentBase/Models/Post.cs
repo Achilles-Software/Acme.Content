@@ -11,8 +11,12 @@ namespace Achilles.Acme.Content.Models
     [CoreContentEntity]
     public class Post
     {
-        public Post()
+        public Post() // string contentTypeUId )
         {
+            //ContentTypeUId = contentTypeUId;
+
+            // TODO: Make access easier...
+
             //Tags = new JoinCollectionFacade<Tag, ContentBaseTags>(
             //    ContentBaseTags, // The associative entity model
             //    m => m.Tag, // The selector function
@@ -22,7 +26,8 @@ namespace Achilles.Acme.Content.Models
         [Key]
         public int PostId { get; set; }
 
-        public Guid ContentTypeId { get; set; }
+        [Required]
+        public string ContentTypeUId { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
 

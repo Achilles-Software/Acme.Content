@@ -11,6 +11,8 @@
 #region Namespaces
 
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 #endregion
 
@@ -31,20 +33,29 @@ namespace Achilles.Acme.Content.Services
             Succeeded = success;
         }
 
-        public ContentServiceResult( ContentServiceError error, Exception e )
+        public ContentServiceResult( ContentServiceErrorType errorType, ContentServiceError error )
         {
             Succeeded = false;
-            Error = error;
-            Exception = e;
+            ErrorType = errorType;
+            Errors = new ContentServiceErrors();
+
+            Errors.AddError( error );
         }
-        
+
+        public ContentServiceResult( ContentServiceErrorType errorType, ContentServiceErrors errors )
+        {
+            Succeeded = false;
+            ErrorType = errorType;
+            Errors = errors;
+        }
+
         #endregion
 
         #region Properties
 
-        public Exception Exception { get; private set; }
+        public ContentServiceErrors Errors { get; private set; }
 
-        public ContentServiceError Error { get; private set; }
+        public ContentServiceErrorType ErrorType { get; private set; }
 
         public bool Succeeded { get; private set; }
 
@@ -56,9 +67,19 @@ namespace Achilles.Acme.Content.Services
             }
         }
 
-        public static ContentServiceResult Failed( ContentServiceError error, Exception e = null )
+        public static ContentServiceResult Failed( ContentServiceErrorType errorType, Exception e = null )
         {
-            return new ContentServiceResult( error, e );
+            return new ContentServiceResult( errorType, new ContentServiceError( string.Empty, e ) );
+        }
+
+        public static ContentServiceResult Failed( ContentServiceErrorType errorType, ContentServiceError error = null )
+        {
+            return new ContentServiceResult( errorType, error );
+        }
+
+        public static ContentServiceResult Failed( ContentServiceErrorType errorType, ContentServiceErrors errors = null )
+        {
+            return new ContentServiceResult( errorType, errors );
         }
 
         #endregion

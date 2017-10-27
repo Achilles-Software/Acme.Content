@@ -12,7 +12,7 @@
 
 using Achilles.Acme.Configuration;
 using Achilles.Acme.Content.Data;
-using Achilles.Acme.Core.Data;
+using Achilles.Acme.Data;
 using Achilles.Acme.Plugins;
 
 using Microsoft.AspNetCore.Mvc.Razor;
@@ -39,7 +39,7 @@ namespace Achilles.Acme.Content
 
         #region Module Registration / Initialization
 
-        public override void Initialize( IServiceCollection services )
+        public override async void Initialize( IServiceCollection services )
         {
             base.Initialize( services );
 
@@ -47,7 +47,7 @@ namespace Achilles.Acme.Content
             var serviceProvider = services.BuildServiceProvider();
             var contentDbContext = serviceProvider.GetRequiredService<ContentDbContext>();
 
-            contentDbContext.MigrateDbContextToLatestVersion( serviceProvider );
+            await contentDbContext.MigrateDatabaseToLatestVersionAsync( serviceProvider );
         }
 
         protected override void RegisterSettings( IServiceCollection services )
@@ -60,7 +60,7 @@ namespace Achilles.Acme.Content
             {
                 options.FileProviders.Add( new EmbeddedFileProvider(
                     this.GetType().GetTypeInfo().Assembly,
-                    baseNamespace: "Acme.Content.EmbeddedViews" ) );
+                    baseNamespace: "Achilles.Acme.Content.EmbeddedViews" ) );
             } );
         }
 
@@ -101,7 +101,10 @@ namespace Achilles.Acme.Content
 
         public override string Version
         {
-            get { return "0.1.0-alpha"; }
+            get
+            {
+                return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            }
         }
 
         public override int Type

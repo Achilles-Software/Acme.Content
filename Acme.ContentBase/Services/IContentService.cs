@@ -10,7 +10,8 @@
 
 #region Namespaces
 
-//using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Achilles.Acme.Content.Models;
+using Achilles.Acme.Plugins;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,30 +20,38 @@ using System.Threading.Tasks;
 namespace Achilles.Acme.Content.Services
 {
     /// <summary>
-    /// Required Interface for ACME CMS content type services.
+    /// Interface for Acme CMS content type services.
     /// </summary>
-    /// <typeparam name="T">Content type model</typeparam>
-    public interface IContentService<T>
+    /// <typeparam name="TEntity">Content type entity</typeparam>
+    public interface IContentService<TEntity>
     {
-        #region ModelState
+        #region Identification
 
-        // TODO: Resolve model state issues
-        //ModelStateDictionary ModelState { get; set; }
+        IPlugin Plugin { get; }
+
+        #endregion
+
+        #region Validation
+
+        ContentServiceResult Validate( TEntity model );
         
         #endregion
 
-        #region Query Methods
+        #region
 
-        Task<T> GetAsync( int id, bool isPublished = true );
-        IQueryable<T> GetAll( bool isPublished = true );
+        Task<TEntity> GetAsync( int id, Status status = Status.Published );
+
+        IQueryable<TEntity> GetAll();
+
+        IQueryable<TEntity> GetByStatus( Status status = Status.Published );
 
         #endregion
 
         #region CRUD Methods
 
-        Task<ContentServiceResult> CreateAsync( T item );
-        Task<ContentServiceResult> EditAsync( T item );
-        Task<ContentServiceResult> DeleteAsync( T item );
+        Task<ContentServiceResult> CreateAsync( TEntity item );
+        Task<ContentServiceResult> EditAsync( TEntity item );
+        Task<ContentServiceResult> DeleteAsync( TEntity item );
 
         #endregion
     }

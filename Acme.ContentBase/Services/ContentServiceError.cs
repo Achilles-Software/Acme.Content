@@ -10,27 +10,54 @@
 
 #region Namespaces
 
+using System;
 using System.Collections.Generic;
 
 #endregion
 
 namespace Achilles.Acme.Content.Services
 {
-    public enum ContentServiceError : int
+    public class ContentServiceError
     {
-        Unknown = 0x01,
-        Validation = 0x02,
+        #region Constructor(s)
 
-        SqlReferentialConstraint = 547,
-    }
-
-    public class DataServiceErrorString
-    {
-        public static readonly IDictionary<ContentServiceError, string> Names = new Dictionary<ContentServiceError, string>
+        public ContentServiceError( string key, Exception exception )
+            : this( key, exception, errorMessage: null )
         {
-            { ContentServiceError.Unknown, "Unknown access failure" },
-            { ContentServiceError.Validation, "Validation failure" },
-            { ContentServiceError.SqlReferentialConstraint, "SQL Referential Constraint violation" },
-        };
+            if ( key == null )
+            {
+                throw new ArgumentNullException( nameof( key ) );
+            }
+
+            if ( exception == null )
+            {
+                throw new ArgumentNullException( nameof( exception ) );
+            }
+        }
+
+        public ContentServiceError( string key, Exception exception, string errorMessage )
+            : this( key, errorMessage )
+        {
+            Exception = exception ?? throw new ArgumentNullException( nameof( exception ) );
+        }
+
+        public ContentServiceError( string key, string errorMessage )
+        {
+            Key = key ?? throw new ArgumentNullException( nameof( key ) );
+
+            ErrorMessage = errorMessage ?? string.Empty;
+        }
+
+        #endregion
+
+        #region Properties
+
+        public string Key { get; }
+
+        public Exception Exception { get; }
+
+        public string ErrorMessage { get; }
+
+        #endregion
     }
 }
