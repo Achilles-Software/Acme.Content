@@ -24,7 +24,7 @@ namespace Achilles.Acme.Content.Models
     /// <summary>
     /// The base class implentation for a derived CMS content type item.
     /// </summary>
-    public abstract class ContentItem : IContentEntity, ITenantEntity
+    public abstract class ContentItem : IContentEntity, ITenantEntity, ISoftDeleteEntity
     {
         public ContentItem()// string pluginId, string userId, string title )
         {
@@ -39,6 +39,8 @@ namespace Achilles.Acme.Content.Models
         public int Id { get; set; }
 
         public string TenantId { get; set; }
+
+        public bool? IsDeleted { get; set; }
 
         [Required]
         public string CreatedByUserId { get; set; }

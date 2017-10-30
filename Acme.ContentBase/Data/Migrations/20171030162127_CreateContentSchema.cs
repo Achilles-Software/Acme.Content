@@ -15,7 +15,7 @@ namespace Achilles.Acme.Content.Data.Migrations
                 {
                     PostId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ContentTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ContentTypeUId = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

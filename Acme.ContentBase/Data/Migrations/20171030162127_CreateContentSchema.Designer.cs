@@ -11,7 +11,7 @@ using System;
 namespace Achilles.Acme.Content.Data.Migrations
 {
     [DbContext(typeof(ContentDbContext))]
-    [Migration("20171017161420_CreateContentSchema")]
+    [Migration("20171030162127_CreateContentSchema")]
     partial class CreateContentSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,7 +47,8 @@ namespace Achilles.Acme.Content.Data.Migrations
                     b.Property<int>("PostId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("ContentTypeId");
+                    b.Property<string>("ContentTypeUId")
+                        .IsRequired();
 
                     b.HasKey("PostId");
 

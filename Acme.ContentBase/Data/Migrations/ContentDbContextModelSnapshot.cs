@@ -46,7 +46,8 @@ namespace Achilles.Acme.Content.Data.Migrations
                     b.Property<int>("PostId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("ContentTypeId");
+                    b.Property<string>("ContentTypeUId")
+                        .IsRequired();
 
                     b.HasKey("PostId");
 
