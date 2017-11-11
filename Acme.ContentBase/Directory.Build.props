@@ -1,6 +1,0 @@
-﻿<Project>
-
-  <Import Project="Acme.Package.props"/>
-  <Import Project="Version.props" />
-
-</Project>

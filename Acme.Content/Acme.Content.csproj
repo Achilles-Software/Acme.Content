@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Description>Achilles Acme CMS Content base library</Description>
+    <Description>Achilles Acme CMS Content base package.</Description>
     <RootNamespace>Achilles.Acme.Content</RootNamespace>
     <PackageProjectUrl>https://github.com/Achilles-Software/Acme.Content</PackageProjectUrl>
     <PackageIconUrl>https://github.com/Achilles-Software/Acme.Content/icon.png</PackageIconUrl>
