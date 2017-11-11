@@ -10,7 +10,9 @@
 
 #region Namespaces
 
+using Achilles.Acme.Content.Data.Models;
 using Achilles.Acme.Content.Models;
+using Achilles.Acme.Data.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,7 +21,7 @@ using System.Threading.Tasks;
 
 namespace Achilles.Acme.Content.Services
 {
-    public abstract class ContentRepositoryBase<TEntity> : IContentRepository<TEntity>
+    public abstract class ContentRepositoryBase<TEntity> : RepositoryBase<TEntity>, IContentRepository<TEntity>
         where TEntity: ContentItem
     {
         #region Fields
@@ -30,7 +32,7 @@ namespace Achilles.Acme.Content.Services
 
         #region Constructor(s)
 
-        public ContentRepositoryBase( DbContext dbContext )
+        public ContentRepositoryBase( DbContext dbContext ) : base( dbContext )
         {
             _dbContext = dbContext;
         }
@@ -46,37 +48,12 @@ namespace Achilles.Acme.Content.Services
 
         public IQueryable<TEntity> GetByStatus( Status status = Status.Published )
         {
-            return _dbContext.Set<TEntity>().Where( m => m.Status == (int)status ).OrderByDescending( m => m.DatePublished );
+            return _dbContext.Set<TEntity>().Where( m => m.Status == status ).OrderByDescending( m => m.DatePublished );
         }
 
         public virtual async Task<TEntity> GetAsync( int id, Status status = Status.Published )
         {
-            return await _dbContext.Set<TEntity>().Where( m => m.Status == (int)status).FirstOrDefaultAsync( d => ( d.Id == id ) );
-        }
-
-        #endregion
-
-        #region CRUD Methods
-
-        public virtual async Task<int> CreateAsync( TEntity item )
-        {
-            _dbContext.Set<TEntity>().Add( item );
-
-            return await _dbContext.SaveChangesAsync();
-        }
-
-        public virtual async Task<int> DeleteAsync( TEntity entity )
-        {
-            _dbContext.Set<TEntity>().Remove( entity );
-
-            return await _dbContext.SaveChangesAsync();
-        }
-
-        public virtual async Task<int> EditAsync( TEntity entity )
-        {
-            _dbContext.Update( entity );
-
-            return await _dbContext.SaveChangesAsync();
+            return await _dbContext.Set<TEntity>().Where( m => m.Status == status ).FirstOrDefaultAsync( d => ( d.Id == id ) );
         }
 
         #endregion

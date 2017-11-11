@@ -11,6 +11,7 @@
 #region Namespaces
 
 using Achilles.Acme.Content.Models;
+using Achilles.Acme.Data.Services;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,25 +22,15 @@ namespace Achilles.Acme.Content.Services
     /// <summary>
     /// Interface for Acme content repositories.
     /// </summary>
-    /// <typeparam name="TEntity"></typeparam>
-    public interface IContentRepository<TEntity>
+    /// <typeparam name="TEntity">Content Entity Type</typeparam>
+    public interface IContentRepository<TEntity> : IRepository<TEntity>
         where TEntity : class
     {
         #region Repository Query Methods
 
         Task<TEntity> GetAsync( int id, Status status = Status.Published );
 
-        IQueryable<TEntity> GetAll();
-
         IQueryable<TEntity> GetByStatus( Status status = Status.Published );
-
-        #endregion
-
-        #region Repository CRUD Methods
-
-        Task<int> CreateAsync( TEntity item );
-        Task<int> EditAsync( TEntity item );
-        Task<int> DeleteAsync( TEntity item );
 
         #endregion
     }

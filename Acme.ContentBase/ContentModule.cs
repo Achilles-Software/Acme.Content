@@ -14,7 +14,8 @@ using Achilles.Acme.Configuration;
 using Achilles.Acme.Content.Data;
 using Achilles.Acme.Data;
 using Achilles.Acme.Plugins;
-
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
@@ -34,44 +35,37 @@ namespace Achilles.Acme.Content
         #region Fields
 
         private static Guid _id = new Guid( "9BD93A15-7693-4A0E-B58E-95F5B8C05113" );
+        private IServiceCollection _services;
+        private IConfiguration _configuration;
 
         #endregion
 
         #region Module Registration / Initialization
 
-        public override async void Initialize( IServiceCollection services )
+        public override async void Configure( IHostingEnvironment env )
         {
-            base.Initialize( services );
-
             // Ensure that the CMS content entities are created and updated to the latest migration
-            var serviceProvider = services.BuildServiceProvider();
+            var serviceProvider = _services.BuildServiceProvider();
             var contentDbContext = serviceProvider.GetRequiredService<ContentDbContext>();
 
             await contentDbContext.MigrateDatabaseToLatestVersionAsync( serviceProvider );
         }
 
-        protected override void RegisterSettings( IServiceCollection services )
+        public override void ConfigureServices( IServiceCollection services, IConfiguration configuration )
         {
-        }
+            _services = services;
+            _configuration = configuration;
 
-        protected override void RegisterViews( IServiceCollection services )
-        {
+            // Add module services..
+            services.AddSingleton<ContentModule>( this );
+
+            // Add embedded views...
             services.Configure<RazorViewEngineOptions>( options =>
             {
                 options.FileProviders.Add( new EmbeddedFileProvider(
                     this.GetType().GetTypeInfo().Assembly,
                     baseNamespace: "Achilles.Acme.Content.EmbeddedViews" ) );
             } );
-        }
-
-        protected override void RegisterRoutes( RouteCollection routes )
-        {
-        }
-
-        protected override void RegisterServices( IServiceCollection services )
-        {
-            // Add module services..
-            services.AddSingleton<ContentModule>( this );
 
             // Add DbContext...
             string connectionString = ConfigurationHelper.GetConfiguration( services ).GetConnectionString( "DefaultConnection" );
@@ -84,7 +78,7 @@ namespace Achilles.Acme.Content
 
         #region IPlugin Members
 
-        public override Guid Id
+        public override Guid UId
         {
             get { return _id; }
         }

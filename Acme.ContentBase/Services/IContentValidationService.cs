@@ -10,8 +10,7 @@
 
 #region Namespaces
 
-using System;
-using System.Collections;
+using Achilles.Acme.Data.Services;
 
 #endregion
 
@@ -21,7 +20,7 @@ namespace Achilles.Acme.Content.Services
     {
         void AddError( string key, string errorMessage );
 
-        ContentServiceErrors GetErrors();
+        ServiceErrors GetErrors();
 
         bool IsValid { get; }
     }

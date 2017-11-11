@@ -1,14 +1,24 @@
-﻿using Achilles.Acme.Content.Data;
-using System;
+﻿#region Copyright Notice
+
+// Copyright (c) by Achilles Software, All rights reserved.
+//
+// Licensed under the MIT License. See License.txt in the project root for license information.
+//
+// Send questions regarding this copyright notice to: mailto:Todd.Thomson@achilles-software.com
+
+#endregion
+
+#region Namespaces
+
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
-namespace Achilles.Acme.Content.Models
+#endregion
+
+namespace Achilles.Acme.Content.Data.Models
 {
     [Table("cms_Posts")]
-    [CoreContentEntity]
     public class Post
     {
         public Post() // string contentTypeUId )

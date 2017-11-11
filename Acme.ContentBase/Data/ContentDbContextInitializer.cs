@@ -10,7 +10,7 @@
 
 #region Namespaces
 
-using Achilles.Acme.Data;
+using Achilles.Acme.Data.Database;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;

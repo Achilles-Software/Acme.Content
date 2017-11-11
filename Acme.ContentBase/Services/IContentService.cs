@@ -11,6 +11,7 @@
 #region Namespaces
 
 using Achilles.Acme.Content.Models;
+using Achilles.Acme.Data.Services;
 using Achilles.Acme.Plugins;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,17 +24,11 @@ namespace Achilles.Acme.Content.Services
     /// Interface for Acme CMS content type services.
     /// </summary>
     /// <typeparam name="TEntity">Content type entity</typeparam>
-    public interface IContentService<TEntity>
+    public interface IContentService<TEntity> : IService<TEntity>
     {
-        #region Identification
-
-        IPlugin Plugin { get; }
-
-        #endregion
-
         #region Validation
 
-        ContentServiceResult Validate( TEntity model );
+        ServiceResult Validate( TEntity model );
         
         #endregion
 
@@ -41,17 +36,7 @@ namespace Achilles.Acme.Content.Services
 
         Task<TEntity> GetAsync( int id, Status status = Status.Published );
 
-        IQueryable<TEntity> GetAll();
-
         IQueryable<TEntity> GetByStatus( Status status = Status.Published );
-
-        #endregion
-
-        #region CRUD Methods
-
-        Task<ContentServiceResult> CreateAsync( TEntity item );
-        Task<ContentServiceResult> EditAsync( TEntity item );
-        Task<ContentServiceResult> DeleteAsync( TEntity item );
 
         #endregion
     }

@@ -8,10 +8,16 @@
 
 #endregion
 
-namespace Achilles.Acme.Content.Entities
+#region Namespaces
+
+using System;
+
+#endregion
+
+namespace Achilles.Acme.Content.Data
 {
-    public interface ITenantEntity
+    [AttributeUsage( AttributeTargets.Class )]
+    public class ContentBaseEntity : Attribute
     {
-        string TenantId { get; set; }
     }
 }

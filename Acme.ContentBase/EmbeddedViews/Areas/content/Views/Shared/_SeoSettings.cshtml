@@ -1,11 +1,13 @@
-﻿@model Achilles.Acme.Models.IContentBase
+﻿@using Achilles.Acme.Content.Models
+@using Achilles.Acme.Content.ViewModels
+@model IContentViewModel
 <div id="content-seo">
     <fieldset class=" collapsible">
         <legend class="collapse-processed"><a href="#">SEO Settings</a></legend>
         <div class="fieldset-wrapper">
             <div id="SeoFriendlyUrl" class="form-item">
                 @Html.CheckBox( "SEOFriendlyUrl" )
-                <label class="inline" for="SEOFriendlyUrl">Override SEO Url?</label>                            
+                <label class="inline" for="SeoFriendlyTitle">Override SEO Url?</label>                            
                 <label for="seo-friendly-url">
                     @Html.CheckBox( "Seo Friendly Url" )
                     <input id="edit-pathauto-perform-alias" class="form-checkbox" type="checkbox" checked="checked"

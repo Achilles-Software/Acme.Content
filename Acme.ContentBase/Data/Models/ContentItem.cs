@@ -10,29 +10,23 @@
 
 #region Namespaces
 
-using Achilles.Acme.Content.Entities;
-using Achilles.Acme.Content.Helpers;
+using Achilles.Acme.Content.Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 #endregion
 
-namespace Achilles.Acme.Content.Models
+namespace Achilles.Acme.Content.Data.Models
 {
     /// <summary>
     /// The base class implentation for a derived CMS content type item.
     /// </summary>
-    public abstract class ContentItem : IContentEntity, ITenantEntity, ISoftDeleteEntity
+    public abstract class ContentItem : IContentEntity
     {
-        public ContentItem()// string pluginId, string userId, string title )
+        public ContentItem()
         {
-            //Title = title;
-            //SeoFriendlyTitle = SeoHelpers.SeoFriendlyTitle( Title );
-            //CreatedByUserId = userId;
-
-            Post = new Post();// pluginId );
+            Post = new Post();
         }
 
         [Key]
@@ -49,6 +43,9 @@ namespace Achilles.Acme.Content.Models
         public DateTime DateCreated { get; set; } = DateTime.Now;
 
         [Required]
+        public string ModifiedByUserId { get; set; }
+
+        [Required]
         public DateTime DateModified { get; set; } = DateTime.Now;
 
         [Required]
@@ -57,14 +54,8 @@ namespace Achilles.Acme.Content.Models
         [Required]
         public string ConcurrencyStamp { get; set; } = Guid.NewGuid().ToString();
 
-        // Deprecated - Use Status
-        public bool IsPublished { get; set; } = false;
-
         [Required]
-        public int Status { get; set; } = (int) Achilles.Acme.Content.Models.Status.Draft;
-
-        [Required]
-        public bool IsSticky { get; set; } = false;
+        public Status Status { get; set; } = Status.Draft;
 
         [Required]
         [StringLength( 128 )]
@@ -76,8 +67,8 @@ namespace Achilles.Acme.Content.Models
         [StringLength( 256 )]
         public string SeoDescription { get; set; }
 
-        [ForeignKey( "Post" )]
-        public int PostIdReference { get; set; }
+        [ForeignKey("Post")]
+        public int PostId { get; set; }
 
         public Post Post { get; set; }
     }

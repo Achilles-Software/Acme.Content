@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+VisualStudioVersion = 15.0.27004.2008
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acme.ContentBase", "Acme.ContentBase\Acme.ContentBase.csproj", "{616A347E-1FF1-4624-AB25-C4A6AB1A1669}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acme.Content", "Acme.ContentBase\Acme.Content.csproj", "{616A347E-1FF1-4624-AB25-C4A6AB1A1669}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acme.Core", "..\Acme.Core\Acme.Core\Acme.Core.csproj", "{1D25E722-D379-40CA-9610-3B43DD5B0553}"
 EndProject
@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acme.Composition", "..\Acme
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{82C747FD-F46D-4117-AE6F-BAD826A62B19}"
 	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
 		Nuget.config = Nuget.config
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acme.Content.Web", "Acme.Content.Web\Acme.Content.Web.csproj", "{86E3649E-A5EE-40A1-A189-5B9990A92A0C}"
@@ -21,6 +23,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acme.Security", "..\Acme.Security\Acme.Security\Acme.Security.csproj", "{AA4CD71D-F80D-4215-939F-BDAEE71B1E1E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acme.UI", "..\Acme.UI\Acme.UI\Acme.UI.csproj", "{5748E64D-83E2-4CB6-8093-73B2374A9915}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Acme.Modules", "Acme.Modules", "{1B73EE91-6765-4CD0-9ABC-44CAE1F531DA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acme.Data", "..\Acme.Data\Acme.Data\Acme.Data.csproj", "{E55BA858-807A-4614-B1BB-FF89FBE27A89}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acme.Content.Tests", "Acme.Content.Tests\Acme.Content.Tests.csproj", "{E8C3D7B8-5019-499F-AE26-7B193CEA7B6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +60,14 @@ Global
 		{5748E64D-83E2-4CB6-8093-73B2374A9915}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5748E64D-83E2-4CB6-8093-73B2374A9915}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5748E64D-83E2-4CB6-8093-73B2374A9915}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E55BA858-807A-4614-B1BB-FF89FBE27A89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E55BA858-807A-4614-B1BB-FF89FBE27A89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E55BA858-807A-4614-B1BB-FF89FBE27A89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E55BA858-807A-4614-B1BB-FF89FBE27A89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8C3D7B8-5019-499F-AE26-7B193CEA7B6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8C3D7B8-5019-499F-AE26-7B193CEA7B6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8C3D7B8-5019-499F-AE26-7B193CEA7B6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8C3D7B8-5019-499F-AE26-7B193CEA7B6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,8 +75,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{1D25E722-D379-40CA-9610-3B43DD5B0553} = {E36FEACB-B934-4AAB-97BC-6CEA5B106D4F}
 		{7C69E58E-21AA-405A-9DE3-D5F292BFC6BE} = {E36FEACB-B934-4AAB-97BC-6CEA5B106D4F}
-		{AA4CD71D-F80D-4215-939F-BDAEE71B1E1E} = {E36FEACB-B934-4AAB-97BC-6CEA5B106D4F}
-		{5748E64D-83E2-4CB6-8093-73B2374A9915} = {E36FEACB-B934-4AAB-97BC-6CEA5B106D4F}
+		{AA4CD71D-F80D-4215-939F-BDAEE71B1E1E} = {1B73EE91-6765-4CD0-9ABC-44CAE1F531DA}
+		{5748E64D-83E2-4CB6-8093-73B2374A9915} = {1B73EE91-6765-4CD0-9ABC-44CAE1F531DA}
+		{E55BA858-807A-4614-B1BB-FF89FBE27A89} = {E36FEACB-B934-4AAB-97BC-6CEA5B106D4F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3CE845D5-4147-4F12-99B6-D7DB3292AF92}

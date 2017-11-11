@@ -1,3 +1,13 @@
+#region Copyright Notice
+
+// Copyright (c) by Achilles Software, All rights reserved.
+//
+// Licensed under the MIT License. See License.txt in the project root for license information.
+//
+// Send questions regarding this copyright notice to: mailto:Todd.Thomson@achilles-software.com
+
+#endregion
+
 #region Namespaces
 
 using Achilles.Acme.Content.Data;
@@ -8,10 +18,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 #endregion
 
-namespace Achilles.Acme.Content.Models
+namespace Achilles.Acme.Content.Data.Models
 {
     [Table( "cms_Tags" )]
-    [CoreContentEntity]
+    [ContentBaseEntity]
     public partial class Tag
     {
         public Tag()

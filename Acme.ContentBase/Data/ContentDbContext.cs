@@ -10,8 +10,7 @@
 
 #region Namespaces
 
-using Achilles.Acme.Content.Models;
-using Achilles.Acme.Data;
+using Achilles.Acme.Content.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 #endregion

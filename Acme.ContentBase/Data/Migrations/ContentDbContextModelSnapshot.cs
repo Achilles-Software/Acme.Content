@@ -20,7 +20,7 @@ namespace Achilles.Acme.Content.Data.Migrations
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Achilles.Acme.Content.Models.Comment", b =>
+            modelBuilder.Entity("Achilles.Acme.Content.Data.Models.Comment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -41,7 +41,7 @@ namespace Achilles.Acme.Content.Data.Migrations
                     b.ToTable("cms_Comments");
                 });
 
-            modelBuilder.Entity("Achilles.Acme.Content.Models.Post", b =>
+            modelBuilder.Entity("Achilles.Acme.Content.Data.Models.Post", b =>
                 {
                     b.Property<int>("PostId")
                         .ValueGeneratedOnAdd();
@@ -54,7 +54,7 @@ namespace Achilles.Acme.Content.Data.Migrations
                     b.ToTable("cms_Posts");
                 });
 
-            modelBuilder.Entity("Achilles.Acme.Content.Models.PostTags", b =>
+            modelBuilder.Entity("Achilles.Acme.Content.Data.Models.PostTags", b =>
                 {
                     b.Property<int>("PostId");
 
@@ -67,7 +67,7 @@ namespace Achilles.Acme.Content.Data.Migrations
                     b.ToTable("cms_PostTags");
                 });
 
-            modelBuilder.Entity("Achilles.Acme.Content.Models.Tag", b =>
+            modelBuilder.Entity("Achilles.Acme.Content.Data.Models.Tag", b =>
                 {
                     b.Property<int>("TagId")
                         .ValueGeneratedOnAdd();
@@ -83,25 +83,25 @@ namespace Achilles.Acme.Content.Data.Migrations
                     b.ToTable("cms_Tags");
                 });
 
-            modelBuilder.Entity("Achilles.Acme.Content.Models.Comment", b =>
+            modelBuilder.Entity("Achilles.Acme.Content.Data.Models.Comment", b =>
                 {
-                    b.HasOne("Achilles.Acme.Content.Models.Comment")
+                    b.HasOne("Achilles.Acme.Content.Data.Models.Comment")
                         .WithMany("Responses")
                         .HasForeignKey("CommentId");
 
-                    b.HasOne("Achilles.Acme.Content.Models.Post")
+                    b.HasOne("Achilles.Acme.Content.Data.Models.Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId");
                 });
 
-            modelBuilder.Entity("Achilles.Acme.Content.Models.PostTags", b =>
+            modelBuilder.Entity("Achilles.Acme.Content.Data.Models.PostTags", b =>
                 {
-                    b.HasOne("Achilles.Acme.Content.Models.Post", "Post")
+                    b.HasOne("Achilles.Acme.Content.Data.Models.Post", "Post")
                         .WithMany("PostTags")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Achilles.Acme.Content.Models.Tag", "Tag")
+                    b.HasOne("Achilles.Acme.Content.Data.Models.Tag", "Tag")
                         .WithMany("PostTags")
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade);

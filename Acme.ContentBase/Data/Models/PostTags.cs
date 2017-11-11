@@ -18,13 +18,13 @@ using System.Text;
 
 #endregion
 
-namespace Achilles.Acme.Content.Models
+namespace Achilles.Acme.Content.Data.Models
 {
     /// <summary>
     /// Many-Many join entity for Posts and Tags.
     /// </summary>
     [Table( "cms_PostTags" )]
-    [CoreContentEntity]
+    [ContentBaseEntity]
     public class PostTags
     {
         public int PostId { get; set; }
